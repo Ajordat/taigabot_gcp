@@ -3,9 +3,9 @@ from os import environ
 
 import functions_framework
 
-from commons import TaigaException
-from parameters_handler import ParametersHandler
-from taiga_bot import TaigaBot
+from taigabot_gcp.commons import TaigaException
+from taigabot_gcp.parameters_handler import ParametersHandler
+from taigabot_gcp.taiga_bot import TaigaBot
 
 
 @functions_framework.http

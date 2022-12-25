@@ -2,8 +2,8 @@
 import json
 from typing import Optional
 
-from commons import format_strings_in_dict
-from commons import MissingParameters
+from .commons import format_strings_in_dict
+from .commons import MissingParameters
 
 
 class ParametersHandler:

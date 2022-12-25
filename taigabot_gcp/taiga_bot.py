@@ -4,7 +4,7 @@ from typing import Dict, Optional
 from taiga import TaigaAPI
 from taiga.models import models
 
-from commons import TaigaException
+from .commons import TaigaException
 
 
 class TaigaBot(TaigaAPI):
