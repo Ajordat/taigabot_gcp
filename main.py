@@ -1,5 +1,7 @@
-import functions_framework
+"""Main module. The `main` method will receive the HTTP request and handle it."""
 from os import environ
+
+import functions_framework
 
 from commons import TaigaException
 from parameters_handler import ParametersHandler
@@ -26,31 +28,27 @@ def main(request):
 
         # Authenticate the TaigaBot account
         taigabot.auth(
-           username=environ.get("TAIGABOT_ACCOUNT"),
-           password=environ.get("TAIGABOT_PASSWORD")
+            username=environ.get("TAIGABOT_ACCOUNT"),
+            password=environ.get("TAIGABOT_PASSWORD"),
         )
-    except TaigaException as e:
-        print(e)
-        return f"Unable to authenticate into Taiga", 500
+    except TaigaException as exception:
+        print(exception)
+        return "Unable to authenticate into Taiga", 500
 
     request_json = request.get_json(silent=True)
     parameters = ParametersHandler("user_stories")
 
     try:
         data = parameters.parse_payload(request_json)
-    except TaigaException as e:
-        return str(e), 400
-    except FileNotFoundError as e:
-        return f"File '{e.filename}' not found", 404
+    except TaigaException as exception:
+        return str(exception), 400
+    except FileNotFoundError as exception:
+        return f"File '{exception.filename}' not found", 404
 
     try:
-        # Parse the file received and build its User Story
-        # user_story = taigabot.parse_user_story_from_json(filename)
-        # user_story = merge_data_into_user_story(user_story, data)
-        print(data)
-
+        # Build the User Story with the parsed data
         taigabot.build_user_story(data)
-    except TaigaException as e:
-        return str(e), 400
+    except TaigaException as exception:
+        return str(exception), 400
 
-    return 'User Story created', 200
+    return "User Story created", 200
