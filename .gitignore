@@ -1,0 +1,13 @@
+# Do not add any personal User Stories unless they are demos
+user_stories/*
+!user_stories/demos
+test.json
+
+# Ignore virtual environment
+venv/*
+
+# Ignore JetBrains configuration
+.idea
+
+# Ignore Python's cache
+__pycache__

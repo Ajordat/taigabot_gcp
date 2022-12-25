@@ -1,0 +1,4 @@
+# Function dependencies, for example:
+# package>=version
+functions-framework==3.2.0
+python-taiga==1.0.0

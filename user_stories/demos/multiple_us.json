@@ -1,0 +1,41 @@
+{
+    "user_stories": [
+        {
+            "project_slug": "test",
+            "assignee": "autobot",
+            "subject": "Hey you got some work to do",
+            "tags": ["tag1", "tag2"],
+            "status": "ready-for-test",
+            "description": "Use this template freely. The only mandatory fields are the subject and the project_slug.\nThe whole `tasks` field is optional as well.",
+            "tasks": [
+                {
+                    "subject": "Look at me, my definition is optional",
+                    "order": 1,
+                    "assignee": "someoneelse"
+                },
+                {
+                    "subject": "Mine too! Plus my assignee defaults to the User Story one!",
+                    "order": 2
+                }
+            ]
+        },
+        {
+            "project_slug": "test",
+            "assignee": "ajorda",
+            "subject": "Hey you got some work to do",
+            "description": "Use this template freely. The only mandatory fields are the subject and the project_slug.\nThe whole `tasks` field is optional as well.",
+            "tasks": [
+                {
+                    "subject": "Look at me, my definition is optional",
+                    "order": 1,
+                    "assignee": "someoneelse",
+                    "tags": ["tag2"]
+                },
+                {
+                    "subject": "Mine too! Plus my assignee is not specified.",
+                    "order": 2
+                }
+            ]
+        }
+    ]
+}

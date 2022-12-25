@@ -1,0 +1,17 @@
+{
+    "project_slug": "test",
+    "subject": "Hey you got some work to do [{keyword}]",
+    "assignee": "autobot",
+    "description": "Use this template freely. The only mandatory fields are the subject and the project_slug.\nThe whole `tasks` field is optional as well.",
+    "tasks": [
+        {
+            "subject": "Look at me, my definition is optional",
+            "order": 1,
+            "assignee": "autobot"
+        },
+        {
+            "subject": "Mine too! Plus my assignee is optional",
+            "order": 2
+        }
+    ]
+}
