@@ -2,6 +2,6 @@ functions-framework==3.2.0
 python-taiga==1.0.0
 
 # Code quality
-pylint==2.13.9
-mypy==0.991
 black==22.12.0
+mypy==0.991
+pylint==2.13.9
