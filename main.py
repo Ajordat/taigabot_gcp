@@ -20,16 +20,26 @@ def main(request):
        <https://flask.palletsprojects.com/en/1.1.x/api/#flask.make_response>.
     """
 
+    if request.method != 'POST':
+        return f"Invalid method {request.method}", 405
+
+    taiga_domain = environ.get("TAIGA_DOMAIN")
+    taigabot_account = environ.get("TAIGABOT_ACCOUNT")
+    taigabot_password = environ.get("TAIGABOT_PASSWORD")
+
+    if None in [taiga_domain, taigabot_account, taigabot_password]:
+        return "Unable to retrieve credentials for Taigabot", 403
+
     try:
         # Initialize the bot
         taigabot = TaigaBot(
-            host=environ.get("TAIGA_DOMAIN"), tls_verify=True, auth_type="normal"
+            host=taiga_domain, tls_verify=True, auth_type="normal"
         )
 
         # Authenticate the TaigaBot account
         taigabot.auth(
-            username=environ.get("TAIGABOT_ACCOUNT"),
-            password=environ.get("TAIGABOT_PASSWORD"),
+            username=taigabot_account,
+            password=taigabot_password,
         )
     except TaigaException as exception:
         print(exception)

@@ -3,11 +3,16 @@ user_stories/*
 !user_stories/demos
 test.json
 
+# Ignore local environment variables
+.env
+
 # Ignore virtual environment
 venv/*
+.venv/*
 
-# Ignore JetBrains configuration
+# Ignore IDE configuration
 .idea
+.vscode
 
 # Ignore Python's cache
 __pycache__
