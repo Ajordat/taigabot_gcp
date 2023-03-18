@@ -20,7 +20,7 @@ def main(request):
        <https://flask.palletsprojects.com/en/1.1.x/api/#flask.make_response>.
     """
 
-    if request.method != 'POST':
+    if request.method != "POST":
         return f"Invalid method {request.method}", 405
 
     taiga_domain = environ.get("TAIGA_DOMAIN")
@@ -32,9 +32,7 @@ def main(request):
 
     try:
         # Initialize the bot
-        taigabot = TaigaBot(
-            host=taiga_domain, tls_verify=True, auth_type="normal"
-        )
+        taigabot = TaigaBot(host=taiga_domain, tls_verify=True, auth_type="normal")
 
         # Authenticate the TaigaBot account
         taigabot.auth(

@@ -98,13 +98,14 @@ class ParametersHandler:
 
             try:
                 content_bytes = blob.download_as_bytes()
-            except exceptions.NotFound:
-                raise FileNotFoundError(ENOENT, strerror(ENOENT), filename)
-            except exceptions.Forbidden:
-                raise PermissionError(ENOENT, strerror(ENOENT), filename)
-            
-            return json.loads(content_bytes)
+            except exceptions.NotFound as exception:
+                raise FileNotFoundError(
+                    ENOENT, strerror(ENOENT), filename
+                ) from exception
+            except exceptions.Forbidden as exception:
+                raise PermissionError(ENOENT, strerror(ENOENT), filename) from exception
 
+            return json.loads(content_bytes)
 
         # Read data from file
         with open(self.base_dir + filename, encoding="utf-8") as file:
