@@ -54,6 +54,8 @@ def main(request):
         return str(exception), 400
     except FileNotFoundError as exception:
         return f"File '{exception.filename}' not found", 404
+    except PermissionError as exception:
+        return f"Permission error on file '{exception.filename}'", 403
 
     try:
         # Build the User Story with the parsed data

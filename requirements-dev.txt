@@ -1,5 +1,7 @@
 functions-framework==3.2.0
 python-taiga==1.0.0
+python-dotenv==1.0.0
+google-cloud-storage==2.7.0
 
 # Code quality
 black==22.12.0

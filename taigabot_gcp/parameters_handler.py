@@ -1,6 +1,11 @@
 """Module for the class ParametersHandler."""
 import json
 from typing import Optional
+from errno import ENOENT
+from os import strerror
+
+from google.cloud import storage
+from google.api_core import exceptions
 
 from .commons import format_strings_in_dict
 from .commons import MissingParameters
@@ -75,10 +80,31 @@ class ParametersHandler:
 
     def parse_user_story_from_json(self, filename: str):
         """Parse the content of a JSON file.
+        If the path starts with 'gs://', indicating that the file is in Cloud Storage,
+        attempt to retrieve it.
 
         :param str filename: The file to parse.
         :return: The content of the file, which should be a JSON.
         """
+
+        if filename.startswith("gs://"):
+            uri = filename.split("/")
+            bucket = uri[2]
+            path = "/".join(uri[3:])
+
+            storage_client = storage.Client()
+            bucket_client = storage_client.bucket(bucket)
+            blob = bucket_client.blob(path)
+
+            try:
+                content_bytes = blob.download_as_bytes()
+            except exceptions.NotFound:
+                raise FileNotFoundError(ENOENT, strerror(ENOENT), filename)
+            except exceptions.Forbidden:
+                raise PermissionError(ENOENT, strerror(ENOENT), filename)
+            
+            return json.loads(content_bytes)
+
 
         # Read data from file
         with open(self.base_dir + filename, encoding="utf-8") as file:
