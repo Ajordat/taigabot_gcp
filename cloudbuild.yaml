@@ -1,0 +1,15 @@
+steps:
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  args:
+  - gcloud
+  - functions
+  - deploy
+  - ${_FUNCTION_NAME}
+  - --region=${_FUNCTION_REGION}
+  - --source=.
+  - --trigger-http
+  - --runtime=python310
+substitutions:
+  _FUNCTION_NAME: taigabot
+  _FUNCTION_REGION: europe-west1
+  
