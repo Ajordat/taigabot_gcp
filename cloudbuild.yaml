@@ -9,7 +9,21 @@ steps:
   - --source=.
   - --trigger-http
   - --runtime=python310
+  - --service-account=${_SERVICE_ACCOUNT}
+  - --entry-point=main
+  - --update-env-vars=TAIGA_DOMAIN=${_TAIGA_DOMAIN}
+  - --update-secrets=TAIGABOT_ACCOUNT=${_TAIGABOT_ACCOUNT},TAIGABOT_PASSWORD=${_TAIGABOT_PASSWORD}
 substitutions:
+  # The name of the CF
   _FUNCTION_NAME: taigabot
+  # The region of the CF
   _FUNCTION_REGION: europe-west1
-  
+  # The SA that will execute the CF.
+  # I'd recommend using a custom SA solely for this bot, not the default one.
+  _SERVICE_ACCOUNT: ${PROJECT_ID}@appspot.gserviceaccount.com
+  # The domain where the Taiga service is hosted.
+  _TAIGA_DOMAIN: 
+  # The Secrets where the credentials of Taigabot are stored.
+  # You could get away with writing the values here and adjusting the command above, but it's not a good practice.
+  _TAIGA_ACCOUNT: taigabot-account:1
+  _TAIGA_PASSWORD: taigabot-password:1
